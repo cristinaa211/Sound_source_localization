@@ -1,7 +1,7 @@
 function []=send_email(sendto,Subject,Message,fis)
 
-mail='popovici.cristina211@gmail.com';
-password = 'scoala.21';
+mail='';
+password = '';
 host = 'smtp.gmail.com';
 setpref('Internet','SMTP_Server', host);
 setpref('Internet','E_mail',mail);
