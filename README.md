@@ -2,6 +2,7 @@
 
 
 This projects presents a couple of signal methods for detecting and localizing an acoustic signal source by using an Arduino Board and 4 microphones.
+There are two versions : a Python version and a Matlab version which is more complete. 
 It has a matlab GUI. 
 
 The main steps are the following:
