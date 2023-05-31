@@ -1,4 +1,4 @@
-function [xs,ys,zs]=tdoa_sigur(t122,t133,t144,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4,x_real,y_real,z_real)
+function [xs,ys,zs]=tdoa(t122,t133,t144,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4,x_real,y_real,z_real)
 x=[x1,x2,x3,x4];
 y=[y1,y2,y3,y4];
 z=[z1,z2,z3,z4];

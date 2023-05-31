@@ -1,5 +1,6 @@
 clear all
 close all
+
 delete(instrfind)
 arduino=serial('COM6');
 set(arduino,'BaudRate',115200);
@@ -17,12 +18,12 @@ tic
             break
         end
         y(i)= real(str2double(data));
-         i=i+1;
+        i=i+1;
      end
-
 Fs=length(y)/a2/4;
 fclose(arduino);
 delete(instrfind);
+
 [a,b]=size(y);
 j=1;
 if b > 16000
@@ -44,8 +45,6 @@ if b < 16000
         end
 end
 
-%s111=doFilter(s11);s222=doFilter(s12);s333=doFilter(s13);s444=doFilter(s14);
-%s1s=doFilterh(s111);s2s=doFilterh(s222);s3s=doFilterh(s333);s4s=doFilterh(s444);
 f=2;
 prag=0.4;
 %s1=interp(s1s,f);
@@ -81,37 +80,36 @@ fid=fopen('coordonate_z.txt','w');
 b1=fprintf(fid,'%.15f\n',z1,z2,z3,z4);
 fclose(fid);
 
-
+%Compute time of arrivals delays between microphones with each method
 semnale_timp(s1,s2,s3,s4, Fs);
 [tdoa12_cr , tdoa13_cr, tdoa14_cr] = corelatia(s1,s2,s3,s4,Fs);
-%[tdoa12_sp,tdoa13_sp,tdoa14_sp]= spectrograma_s(s1,s2,s3,s4,Fs,prag);
-%[tdoa12_wave,tdoa13_wave,tdoa14_wave]=wavelet_s(s1,s2,s3,s4,Fs,prag);
-%[tdoa12_rpa,tdoa13_rpa,tdoa14_rpa]=rpa(s1,s2,s3,s4,Fs,prag);
+[tdoa12_sp,tdoa13_sp,tdoa14_sp]= spectrograma_s(s1,s2,s3,s4,Fs,prag);
+[tdoa12_wave,tdoa13_wave,tdoa14_wave]=wavelet_s(s1,s2,s3,s4,Fs,prag);
+[tdoa12_rpa,tdoa13_rpa,tdoa14_rpa]=rpa(s1,s2,s3,s4,Fs,prag);
 
+
+% Compute signal source coordinates with each method
 [tdoa12_dpe,tdoa13_dpe,tdoa14_dpe]=dpe(s1,s2,s3,s4,Fs);
-[xs_dpe,ys_dpe,zs_dpe]=tdoa_sigur_timpreal(tdoa12_dpe,tdoa13_dpe,tdoa14_dpe,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
+[xs_dpe,ys_dpe,zs_dpe]= tdoa_timpreal(tdoa12_dpe,tdoa13_dpe,tdoa14_dpe,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
+[xs_cor,ys_cor,zs_cor] = tdoa_timpreal(tdoa12_cr,tdoa13_cr,tdoa14_cr,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
+[xs_sp,ys_sp,zs_sp] = tdoa_timpreal(tdoa12_sp,tdoa13_sp,tdoa14_sp,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4);
+[xs_wav,ys_wav,zs_wav] = tdoa_timpreal(tdoa12_wave,tdoa13_wave,tdoa14_wave,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4);
+[xs_rpa,ys_rpa,zs_rpa] = tdoa_timpreal(tdoa12_rpa,tdoa13_rpa,tdoa14_rpa,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
 
-[xs_cor,ys_cor,zs_cor]=tdoa_sigur_timpreal(tdoa12_cr,tdoa13_cr,tdoa14_cr,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
-%[xs_sp,ys_sp,zs_sp]=tdoa_sigur_timpreal(tdoa12_sp,tdoa13_sp,tdoa14_sp,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4);
-%[xs_wav,ys_wav,zs_wav]=tdoa_sigur_timpreal(tdoa12_wave,tdoa13_wave,tdoa14_wave,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4);
-%[xs_rpa,ys_rpa,zs_rpa]=tdoa_sigur_timpreal(tdoa12_rpa,tdoa13_rpa,tdoa14_rpa,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
 
+%%Tabel with results
+A=["Cross-corelatia",xs_cor,ys_cor,zs_cor];
+B=["RPA",xs_rpa,ys_rpa,zs_rpa];
+C=["Transformata wavelet",xs_wav,ys_wav,zs_wav];
+D=["Spectrograma",xs_sp,ys_sp,zs_sp];
+A1=["Cross-corelatia",tdoa12_cr,tdoa13_cr,tdoa14_cr];
+B1=["RPA",tdoa12_rpa,tdoa13_rpa,tdoa14_rpa];
+C1=["Transformata wavelet",tdoa12_wave,tdoa13_wave,tdoa14_wave];
+D1=["Spectrograma",tdoa12_sp,tdoa13_sp,tdoa14_sp];
+R=[A;B;C;D];
+R1=[A1;B1;C1;D1];
 
-%%Tabel cu rezultate
-
-%A=["Cross-corelatia",xs_cor,ys_cor,zs_cor];
-%B=["RPA",xs_rpa,ys_rpa,zs_rpa];
-%C=["Transformata wavelet",xs_wav,ys_wav,zs_wav];
-%D=["Spectrograma",xs_sp,ys_sp,zs_sp];
-%A1=["Cross-corelatia",tdoa12_cr,tdoa13_cr,tdoa14_cr];
-%B1=["RPA",tdoa12_rpa,tdoa13_rpa,tdoa14_rpa];
-%C1=["Transformata wavelet",tdoa12_wave,tdoa13_wave,tdoa14_wave];
-%D1=["Spectrograma",tdoa12_sp,tdoa13_sp,tdoa14_sp];
-%R=[A;B;C;D];
-%R1=[A1;B1;C1;D1];
-
-%Trimitere Alarma
-
+%Send alarm
 A11=[xs_dpe,ys_dpe,zs_dpe];
 fileID = fopen('coordonate_sursa.txt','w');
 fprintf(fileID, 'S-a detectat o sursa acustica la coordonatele:\n');

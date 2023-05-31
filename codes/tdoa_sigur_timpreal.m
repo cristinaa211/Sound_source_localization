@@ -1,4 +1,4 @@
-function [xs,ys,zs]=tdoa_sigur_timpreal(t12,t13,t14,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
+function [xs,ys,zs]=tdoa_timpreal(t12,t13,t14,x1,x2,x3,x4,y1,y2,y3,y4,z1,z2,z3,z4)
 x=[x1,x2,x3,x4];
 y=[y1,y2,y3,y4];
 z=[z1,z2,z3,z4];
