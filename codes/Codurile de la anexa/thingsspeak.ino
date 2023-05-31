@@ -7,11 +7,11 @@
 #define STAPSK  "your-password"
 #endif
 
-const char* ssid     = "nume112";
-const char* password = "p0p0v1c11";
+const char* ssid     = "";
+const char* password = "";
 
-const char* host = "192.168.1.1";
-const uint16_t port = 3000;
+const char* host = "";
+const uint16_t port = ;
 int keyIndex = 0;            
 unsigned long myChannelNumber = 1006711;
 const char * myWriteAPIKey = "LTV5JU2628LSSSJP";
