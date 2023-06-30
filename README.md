@@ -1,11 +1,11 @@
 # Sound_source_localization
-
+PAPER: https://www.researchgate.net/publication/348685093_An_Overview_of_Signal_Processing_Methods_for_Signal_Source_Localization
 
 This projects presents a couple of signal methods for detecting and localizing an acoustic signal source by using an Arduino Board and 4 microphones.
 There are two versions : a Python version and a Matlab version which is more complete. 
 It has a matlab GUI. 
 
-The main steps are the following:
+# The main steps are the following:
 1. Data acquisition by using an Arduino Board and 4 microphones from which 1 microphone is used as reference.
 2. Signal processing (filtering and interpolation).
 3. Computing time of arrivals and the delays of the signals for each pair of microphones by using Cross-correlation, Spectogram, Wavelet and Recurrence Plot Analysis methods.
@@ -18,18 +18,18 @@ The code needs improvements as well.
 
 In the following, there are some generated artificial signals, affected by noise, and also the results using the methods enumerated above:
 
-The time representations of the signals, corresponding to the 4 microphones:
+# The time representations of the signals, corresponding to the 4 microphones:
 
 ![image](https://github.com/cristinaa211/Sound_source_localization/assets/61435903/167e6aca-9401-4281-a257-aca31b7f8080)
 
 
-The cross-correlation of the signals looks like the following:
+# The cross-correlation of the signals looks like the following:
 
 ![image](https://github.com/cristinaa211/Sound_source_localization/assets/61435903/13e897eb-c3e0-4222-8cfa-f490a89d6760) ![image](https://github.com/cristinaa211/Sound_source_localization/assets/61435903/a83ee734-4395-4fda-8c98-131ec9fbd6da)
 
 
 
-The scalograms of the signals and the detection curves are represented below:
+# The scalograms of the signals and the detection curves are represented below:
 
 
 ![image](https://github.com/cristinaa211/Sound_source_localization/assets/61435903/419ef349-b1fb-4b80-b635-97e9bd885fc1)
@@ -40,7 +40,7 @@ The scalograms of the signals and the detection curves are represented below:
 
 
 
-The spectograms of the signals and the detection curves are represented below:
+# The spectograms of the signals and the detection curves are represented below:
 
 ![image](https://github.com/cristinaa211/Sound_source_localization/assets/61435903/4c10d8f1-c016-4252-ad64-dd2267bf894b)
 
@@ -48,7 +48,7 @@ The spectograms of the signals and the detection curves are represented below:
 
 
 
-The phase diagram computed by using RPA and their corresponding detection curves:
+# The phase diagram computed by using RPA and their corresponding detection curves:
 
 ![image](https://github.com/cristinaa211/Sound_source_localization/assets/61435903/fcfe6907-31f8-4078-98ed-099bc52c166d)
 
